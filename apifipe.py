@@ -4,11 +4,15 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from time import *
 
 servico = Service(ChromeDriverManager().install())
 
-navegador = webdriver.Chrome(service=servico)
+options = webdriver.ChromeOptions()
+options.add_experimental_option('detach', True)
+
+navegador = webdriver.Chrome(options=options, service=servico)
 
 navegador.implicitly_wait(20)
 
@@ -16,7 +20,14 @@ navegador.implicitly_wait(20)
   # try:
 navegador.get('https://veiculos.fipe.org.br/#carro-comum')
 # sleep(5)
-navegador.find_element(By.TAG_NAME, 'li').click()
+
+elemento = navegador.find_element(By.XPATH, '//*[@id="front"]/div[1]/div[1]/ul/li[1]/a')
+
+print(elemento.is_displayed())
+
+EC.element_to_be_clickable((elemento))
+
+
 
 # sleep(5)
 
