@@ -27,15 +27,23 @@ x,y = center(localizacao)
 
 click(x,y)
 
-j = 0
-while j <= 2:
+montadoras_ano_carros = []
+
+ciclo = 0
+while ciclo <= 2:
   sleep(5)
 
+  #  Clica dentro da caixa
   click(x,(y + 150))
 
+  #  Seleciona o primeio campo, Marca do Veículo
   press('tab')
+  
+  #  Seleciona a Marca
   press('down')
   press('enter')
+
+  #  Seleciona o Ano
   press('tab')
   press('tab')
   press('down')
@@ -43,23 +51,24 @@ while j <= 2:
 
   sleep(5)
 
-  elemento = navegador.find_element(By.ID, 'selectAnoModelocarro').click()
-
+  #  Pega uma lista com todas as montadoras
   montadoras = navegador.find_element(By.ID, 'selectMarcacarro').find_elements(By.TAG_NAME, 'option')
+
+  #  Pega uma lista com todos os anos da montadora selecionada
   ano = navegador.find_element(By.ID, 'selectAnocarro').find_elements(By.TAG_NAME, 'option')
-  
-  for z in range(len(ano)):
-    if ano[z].text == '':
-      print(5*'-' + '\n' + montadoras[j+1].text + ' | ' + ano[z+1].text + '\n' + 5*'-')
-    else:
-      print(5*'-' + '\n' + montadoras[j].text + ' | ' + ano[z].text + '\n' + 5*'-')
 
+  #  Pega todos os modelos do ano selecionado
+  modelos = navegador.find_element(By.ID, 'selectAnoModelocarro').find_elements(By.TAG_NAME, 'option')
 
-    veiculos = navegador.find_element(By.ID, 'selectAnoModelocarro').find_elements(By.TAG_NAME, 'option')
+  print(10*'-')
 
-    for i in range(len(veiculos)):
-      if veiculos[i].text == '':
+  for ciclo_ano in range(len(ano)):
+    for carro in range(len(modelos)):
+      if ano[ciclo_ano].text == '' or modelos[carro].text == '':
         continue
-      print(veiculos[i].text)
+      # montadoras_ano_carros.append()
+      print(f'{montadoras[ciclo+1].text} | {ano[ciclo_ano].text} - {modelos[carro].text}')
   
-  j += 1
+  print(10*'-')
+  
+  ciclo += 1
