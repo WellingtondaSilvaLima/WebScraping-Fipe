@@ -31,8 +31,7 @@ montadoras_ano_carros = []
 
 ciclo = 0
 while ciclo < 1:
-  sleep(5)
-
+  sleep(1)
   #  Clica dentro da caixa
   click(x,(y + 150))
 
@@ -49,7 +48,7 @@ while ciclo < 1:
   press('down')
   press('enter')
 
-  sleep(5)
+  sleep(1)
 
   #  Pega uma lista com todas as montadoras
   montadoras = navegador.find_element(By.ID, 'selectMarcacarro').find_elements(By.TAG_NAME, 'option')
@@ -60,6 +59,8 @@ while ciclo < 1:
     if montadoras[index].text == '':
       del(montadoras[index])
 
+  print(len(montadoras))
+
   #  Pega uma lista com todos os anos da montadora selecionada
   ano = navegador.find_element(By.ID, 'selectAnocarro').find_elements(By.TAG_NAME, 'option')
 
@@ -68,13 +69,14 @@ while ciclo < 1:
   for index in range(0, tamanho):
     if ano[index].text == '':
       del(ano[index])
+  
+  print(len(ano))
 
 
 
   print(10*'-')
 
   for ciclo_ano in range(len(ano)):
-    sleep(3)
     #  Pega todos os modelos do ano selecionado
     modelos = navegador.find_element(By.ID, 'selectAnoModelocarro').find_elements(By.TAG_NAME, 'option')
 
@@ -83,9 +85,9 @@ while ciclo < 1:
     for index in range(0, tamanho):
       if modelos[index].text == '':
         del(modelos[index])
+    
 
     for carro in range(len(modelos)):
-      print(len(modelos))
       # montadoras_ano_carros.append()
       print(f'{montadoras[ciclo+1].text} | {ano[ciclo_ano].text} - {modelos[carro].text}')
   
