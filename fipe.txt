@@ -1,6 +1,0 @@
-1. Fazer a requisição do site https://veiculos.fipe.org.br/
-2. Pegar as informações das marcas fiat
-3. Pegar as informações do ano 2024 Gasolina
-4. Pegar as informações dos modelos
-5. Gerar uma tabela
-6. Criar uma executável
