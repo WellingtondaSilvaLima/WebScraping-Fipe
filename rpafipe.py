@@ -11,7 +11,9 @@ import pandas as pd
 def inicio_automacao():
   sleep(1)
   #  Clica dentro da caixa
-  click(x,(y + 150))
+  click(x,(y + 350))
+
+  sleep(1)
 
   #  Seleciona o primeio campo, Marca do Veículo
   press('tab')
@@ -19,6 +21,8 @@ def inicio_automacao():
   #  Seleciona a Marca
   press('down')
   press('enter')
+  
+  sleep(1)
 
   #  Seleciona o Ano
   press('tab')
@@ -68,9 +72,11 @@ def seleciona_ano_seguinte():
     sleep(1)
 
 
-servico = Service(ChromeDriverManager().install())
+servico = Service(ChromeDriverManager(driver_version='125.0.6422.60').install())
 
 navegador = webdriver.Chrome(service=servico)
+
+navegador.set_window_size(930,1014)
 
 navegador.get('https://veiculos.fipe.org.br/#carro-comum')
 
@@ -91,7 +97,7 @@ inicio_automacao()
 montadoras = pega_montadoras(navegador)
 
 ciclo = 0
-while ciclo < len(montadoras):
+while ciclo < 2:  #  len(montadoras)
   ano = pega_anos(navegador)
 
   for ciclo_ano in range(len(ano)):
