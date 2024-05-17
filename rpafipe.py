@@ -13,16 +13,12 @@ def inicio_automacao():
   #  Clica dentro da caixa
   click(x,(y + 350))
 
-  sleep(1)
-
   #  Seleciona o primeio campo, Marca do Veículo
   press('tab')
   
   #  Seleciona a Marca
   press('down')
   press('enter')
-  
-  sleep(1)
 
   #  Seleciona o Ano
   press('tab')
@@ -82,7 +78,7 @@ navegador.get('https://veiculos.fipe.org.br/#carro-comum')
 
 messagebox.showinfo(title='Início', message='Ao iniciar o sistema, não poderá utilizar a máquina até terminar.')
 
-localizacao = locateOnScreen('imagens/carro.png')
+localizacao = locateOnScreen('fipe/imagens/carro.png')
 
 x,y = center(localizacao)
 
@@ -97,7 +93,7 @@ inicio_automacao()
 montadoras = pega_montadoras(navegador)
 
 ciclo = 0
-while ciclo < 2:  #  len(montadoras)
+while ciclo < len(montadoras):
   ano = pega_anos(navegador)
 
   for ciclo_ano in range(len(ano)):
