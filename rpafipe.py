@@ -105,9 +105,13 @@ while ciclo < len(montadoras):
       modelos_lista.append(modelos[carro].text)  #  Adiciona o modelo na lista de modelos
     
     seleciona_ano_seguinte()
+
+  descanso = [3, 10, 13, 20, 23, 30, 33, 40, 43, 50, 53, 60, 63, 70, 73, 80, 83, 90, 93, 100, 103, 110]
+  if ciclo in descanso:
+     messagebox.showinfo(title='Pausa', message='Pausa para descansar. Clique em "ok" para continuar.')
   
   inicio_automacao()
-  
+
   ciclo += 1
 
 montadoras_ano_carros = {
