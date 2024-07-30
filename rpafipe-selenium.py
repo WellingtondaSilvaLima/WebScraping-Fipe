@@ -22,15 +22,25 @@ navegador.maximize_window()  # Deixa a janela maximizada
 sleep(2)
 
 navegador.get('https://veiculos.fipe.org.br/#carro-comum')
-
-while True:
+# sleep(10000000)
+contador = 0
+while contador < 3:
   try:
-    if navegador.find_element(By.CLASS_NAME, 'modal alert'):
+    sleep(2)
+    try:
+      navegador.find_element(By.XPATH, '//*[@id="mm-0"]/div[4]/div[2]/p')
+      print('entrou para refrescar')
       navegador.refresh()
-    else:
+      sleep(5)
+      navegador.find_element(By.XPATH, '//*[@id="fCAWs6"]/div/label/span[2]').click()
+      print('clicou')
+    except:
       campos = navegador.find_elements(By.CLASS_NAME, 'ilustra')
-      print(len(campos))
+      print(f'Tem -> {len(campos)}')
+      contador += 1
       break
-  except:
+  except Exception as e:
+    contador += 1
+    print(f'continuou. O erro foi \n{e}')
     continue
 
