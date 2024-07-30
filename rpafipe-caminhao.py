@@ -1,5 +1,4 @@
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from pyautogui import *
@@ -68,7 +67,9 @@ def seleciona_ano_seguinte():
     sleep(1)
 
 
-servico = Service(ChromeDriverManager(driver_version='125.0.6422.60').install())
+caminho = r'C:\Users\wellington\Desktop\Suporte Atendimento\projetos\APIFipe\APIFipe\chromedriver-win64\chromedriver.exe'
+
+servico = Service(caminho)
 
 navegador = webdriver.Chrome(service=servico)
 
