@@ -12,6 +12,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from time import sleep
 import pandas as pd
+from tkinter import messagebox
 
 
 caminho = r'C:\Users\wellington\Desktop\Suporte Atendimento\projetos\APIFipe\APIFipe\chromedriver-win64\chromedriver.exe'  # Path do chromedriver
@@ -22,25 +23,31 @@ navegador.maximize_window()  # Deixa a janela maximizada
 sleep(2)
 
 navegador.get('https://veiculos.fipe.org.br/#carro-comum')
-# sleep(10000000)
-contador = 0
-while contador < 3:
-  try:
-    sleep(2)
-    try:
-      navegador.find_element(By.XPATH, '//*[@id="mm-0"]/div[4]/div[2]/p')
-      print('entrou para refrescar')
-      navegador.refresh()
-      sleep(5)
-      navegador.find_element(By.XPATH, '//*[@id="fCAWs6"]/div/label/span[2]').click()
-      print('clicou')
-    except:
-      campos = navegador.find_elements(By.CLASS_NAME, 'ilustra')
-      print(f'Tem -> {len(campos)}')
-      contador += 1
-      break
-  except Exception as e:
-    contador += 1
-    print(f'continuou. O erro foi \n{e}')
-    continue
+
+messagebox.showinfo(title='Início', message='Pode iniciar?')
+
+def entra_no_form(identificador:str):
+  campos_carros = navegador.find_element(By.CLASS_NAME, 'form')
+  seletor = campos_carros.find_element(By.ID, identificador)
+  carros = seletor.find_elements(By.TAG_NAME, 'option')
+  print(seletor)
+  print(len(carros))
+
+  print(15*'=')
+
+identificador = ['selectMarcacarro', 'selectMarcacaminhao', 'selectMarcamoto']
+campos = navegador.find_elements(By.CLASS_NAME, 'ilustra')
+campos[0].click()
+sleep(3)
+entra_no_form(f'{identificador[0]}')
+sleep(3)
+campos[1].click()
+sleep(3)
+entra_no_form(f'{identificador[1]}')
+sleep(3)
+campos[2].click()
+sleep(3)
+entra_no_form(f'{identificador[2]}')
+sleep(3)
+
 
