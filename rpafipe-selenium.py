@@ -26,28 +26,26 @@ navegador.get('https://veiculos.fipe.org.br/#carro-comum')
 
 messagebox.showinfo(title='Início', message='Pode iniciar?')
 
-def entra_no_form(identificador:str):
-  campos_carros = navegador.find_element(By.CLASS_NAME, 'form')
-  seletor = campos_carros.find_element(By.ID, identificador)
-  carros = seletor.find_elements(By.TAG_NAME, 'option')
-  print(seletor)
-  print(len(carros))
-
-  print(15*'=')
-
 identificador = ['selectMarcacarro', 'selectMarcacaminhao', 'selectMarcamoto']
-campos = navegador.find_elements(By.CLASS_NAME, 'ilustra')
-campos[0].click()
-sleep(3)
-entra_no_form(f'{identificador[0]}')
-sleep(3)
-campos[1].click()
-sleep(3)
-entra_no_form(f'{identificador[1]}')
-sleep(3)
-campos[2].click()
-sleep(3)
-entra_no_form(f'{identificador[2]}')
-sleep(3)
+tabela_veiculos = navegador.find_element(By.CLASS_NAME, 'tab-veiculos')
+veiculos = tabela_veiculos.find_elements(By.CLASS_NAME, 'ilustra')
+
+veiculos[0].click()
+carros = veiculos[0].find_element(By.CLASS_NAME, 'horizontal')
+artigos_html = carros.find_elements(By.TAG_NAME, 'article')
+formulario = artigos_html[0].find_element(By.CLASS_NAME, 'form')
+step_1 = formulario.find_element(By.CLASS_NAME, 'step-1')
+entrada_carros = step_1.find_element(By.CLASS_NAME, 'input')
+sleep(1)
+entrada_carros.click()
+sleep(1)
+seletor = entrada_carros.find_element(By.TAG_NAME, 'select')
+opcoes_carros = seletor.find_elements(By.TAG_NAME, 'option')
+primeiro = opcoes_carros[1]
+
+print(primeiro.text)
+# for op in opcoes_carros:
+#   print(op.text)
+
 
 
